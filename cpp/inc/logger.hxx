@@ -1,13 +1,13 @@
+#include <fstream>
 
 class Logger
 {
 public:
+	virtual ~Logger();
 	static Logger& Log();
-	Write(const char* in);
-	Write(const int& in);
-	Write(const string& in);
+	void Write(const char* in);
 private:
-	Logger() {};
+	Logger();
 	static Logger* _logger;
-	ofstream _file;
+	std::ofstream _file;
 };
