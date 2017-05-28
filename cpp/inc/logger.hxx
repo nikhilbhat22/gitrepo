@@ -2,11 +2,12 @@
 class Logger
 {
 public:
-	Log();
+	static Logger& Log();
 	Write(const char* in);
 	Write(const int& in);
 	Write(const string& in);
 private:
-	Logger() :_logger(NULL) {};
-	Logger* _logger;
+	Logger() {};
+	static Logger* _logger;
+	ofstream _file;
 };
