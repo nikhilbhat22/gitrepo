@@ -1,4 +1,2 @@
-
-exe = exceptionHandler.o 
-
-exceptionHandler.o = exceptionHandler.cpp
+exe : exceptionHandler.cpp 
+	g++ $^ -o $@
