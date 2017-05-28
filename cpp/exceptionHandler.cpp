@@ -66,6 +66,7 @@ int main ()
 			throw 1;
 
 		c = d/d1;
+		cout << " type of : " << typeid(*A).name() << endl;
 		DynamicC& C = dynamic_cast<DynamicC&> (*A);
 		C.X();
 	}
