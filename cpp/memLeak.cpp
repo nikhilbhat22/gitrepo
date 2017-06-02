@@ -2,6 +2,10 @@
 
 using namespace std;
 
+class ZeroClass {};
+
+class VirtualClass { virtual void test() {}; };
+
 class CopyAssign
 {
 	private:
@@ -29,31 +33,21 @@ class CopyAssign
 			};
 		
 			const int& Num() const { return num;};
+			void SetNum(const int& in) { num = in; };
 };
 
 int main (int argc, char* argv[])
 {
-	for (int i = 0 ; i < argc; ++i)
-		cout << " [" << i << "] " <<  argv[i] << endl;
+	cout << "ZeroClass size " << sizeof(ZeroClass) << endl;
+	cout << "OneByteClass size " << sizeof(VirtualClass) << endl;
+	int set;
+	float unin;
+	int noset = set * 100 * unin;
+	CopyAssign* ptr = new CopyAssign(100);
+	ptr->SetNum(set);
 
-	char test [6] = {'h','e','l','l','o','\0'};
-	char* p = test;
-	cout << *p << endl;
-	char** dblptr = &p;
-	cout << *dblptr << endl;
+	ptr = new CopyAssign(200);
+	delete ptr;
 
-	CopyAssign obj(10);	
-	CopyAssign obj2(11);
-	cout << " obj = obj2 " << endl;
-	obj = obj2;
-	cout << " CopyAssign objCopy = obj " << endl;
-	CopyAssign objCopy = obj;
-	cout << " objCopy = obj + obj2 " << endl;
-	objCopy = obj + obj2;
-	
-	cout <<  " obj " << obj.Num() << endl;
-	cout <<  " obj2 " << obj2.Num() << endl;
-	cout <<  " objCopy " << objCopy.Num() << endl;
-	
 	return 1;	
 }
