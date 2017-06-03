@@ -15,10 +15,10 @@ OBJS = $(wildcard $(OBJ_DIR)/*.o)
 #$(OBJ_DIR)/%.o: %.cpp g++ -c -I../inc $? $(OBJ_DIR)/$(patsubst $?, %.o, $(wildcard *.cpp))
 
 .cpp.o:
-	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
+	g++ -g -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
 
 .cxx.o:
-	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
+	g++ -g -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
 
 $(EXE_DIR)/exe: $(OBJS) $(MAIN_NAME)
-	g++ -I../inc -o $@ $^
+	g++ -g -I../inc -o $@ $^

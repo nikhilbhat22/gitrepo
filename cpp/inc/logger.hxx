@@ -1,3 +1,6 @@
+#ifndef __LOGGER_HXX__
+#define __LOGGER_HXX__
+
 #include <fstream>
 
 enum LogEnum
@@ -25,3 +28,5 @@ private:
 	std::ofstream _file;
 	LogEnum _logLevel;
 };
+
+#endif
