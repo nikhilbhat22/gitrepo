@@ -1,3 +1,6 @@
+#ifndef __LINKED_LIST_HXX__
+#define __LINKED_LIST_HXX__
+
 #include <iostream>
 #include "logger.hxx"
 #include <cstring>
@@ -177,3 +180,5 @@ LinkedListHelper<T>::CheckCycle(const LinkedList<T>& in)
 	}
 	return false;
 }
+
+#endif

@@ -1,11 +1,34 @@
 #include "logger.hxx"
 #include "LinkedList.hxx"
+#include "SQueue.hxx"
 #include <ctime>
 #include <cstdlib>
 
+void runSQueue();
+
 int main()
 {
+	runSQueue();
 	return 1;
+}
+
+void runSQueue()
+{
+	SQueue<int> q;
+	srand( (int) time(0) );
+	int i = 10;
+	while (i > 0)
+	{
+		int rd = rand() % 100;
+		std::cout << " queue i/p " << rd << std::endl; 
+		q.Enqueue(rd);
+		--i;
+	}
+
+	while (q.Size() > 0)
+	{
+		std::cout << " queue o/p " << q.Dequeue() << std::endl; 
+	}
 }
 
 void runLinkedList()
@@ -26,3 +49,4 @@ void runLinkedList()
 	int ret = LinkedListHelper<int>::CheckCycle(intList);
 	std::cout << " Cycle : " << ret << std::endl;
 }
+
