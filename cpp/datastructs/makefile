@@ -1,13 +1,18 @@
 
 OBJS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
-$(info objs= $(OBJS))
+OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/objs
 
-OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/libs
-$(info $(OBJ_DIR))
+#
+# $^ = dependency list
+# $@ = target list
+# $< = first dependent
+# $? = list of changed dependents
+#
 
-$(OBJ_DIR)/%.o: %.cpp
-		g++ -c -I../inc $^ 
+#$(OBJ_DIR)/%.o: %.cpp g++ -c -I../inc $? $(OBJ_DIR)/$(patsubst $?, %.o, $(wildcard *.cpp))
 
-exe: $(OBJ_DIR)/*.o
-		g++ -o $@ $^
+.cpp.o:
+	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
 
+$(OBJ_DIR)/exe: $(OBJ_DIR)/$(OBJS)
+	$(info not creating executables)

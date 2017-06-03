@@ -1,6 +1,9 @@
 
-OBJS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+MAIN_NAME = test.cpp
+
 OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/objs
+EXE_DIR = /home/nikhil/GITHUB/gitrepo/cpp/exe
+OBJS = $(wildcard $(OBJ_DIR)/*.o)
 
 #
 # $^ = dependency list
@@ -17,5 +20,5 @@ OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/objs
 .cxx.o:
 	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
 
-$(OBJ_DIR)/exe: $(OBJ_DIR)/$(OBJS)
-	$(info not creating executables)
+$(EXE_DIR)/exe: $(OBJS) $(MAIN_NAME)
+	g++ -I../inc -o $@ $^
