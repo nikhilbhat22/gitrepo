@@ -3,22 +3,30 @@
 #include <cstring>
 
 template<typename T> class LinkedList;
+template<typename T> class LinkedListHelper;
 
 template <typename T>
 class Node
 {
 friend class LinkedList<T>;
+friend class LinkedListHelper<T>;
 	T data;
 	Node<T>* next;
 public:
+	~Node();
 	Node();
 	Node(const T& in);
 
 	void SetData(const T& in);
-	void SetNext(T* in);
+	void SetNext(Node<T>* in);
 
 	T Data();
 };
+
+template <typename T>
+Node<T>::~Node()
+{
+}
 
 template <typename T>
 Node<T>::Node()
@@ -39,12 +47,20 @@ Node<T>::Data()
 	return data;
 }
 
+template <typename T>
+void
+Node<T>::SetNext(Node<T>* in)
+{
+	next = in;
+}
+
 //------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
 
 template <typename T>
 class LinkedList
 {
+friend class LinkedListHelper<T>;
 	void deleteChildNode(Node<T>*);
 	Node<T>* head;
 	Node<T>* tail;
@@ -56,6 +72,8 @@ public:
 	void Insert(T&);
 	unsigned int Size() const;
 	void Print() const;
+	const Node<T>* Head() const;
+	const Node<T>* Tail() const;
 };
 
 template <typename T>
@@ -75,9 +93,11 @@ void
 LinkedList<T>::deleteChildNode(Node<T>* node)
 {
 	if (node->next)
+	{
 		deleteChildNode(node->next);
-	else
-		delete node;	
+	}
+	delete node;	
+	node = 0;
 }
 
 template <typename T>
@@ -86,19 +106,15 @@ LinkedList<T>::Insert(T& in)
 {
 	if (head == 0)
 	{
-		std::cout << "head is null..create" << std::endl;
 		head = new Node<T>(in);
-		//head = new Node<T>();
 		tail = head;
 		size = 1;
 	}
 	else
 	{
-		std::cout << "head exists..append" << std::endl;
 		++size;
 		tail->next = new Node<T>(in);
 		tail = tail->next;
-		std::cout << "tail is " << tail->data << std::endl;
 	}
 }
 
@@ -116,7 +132,48 @@ LinkedList<T>::Print() const
 	Node<T>* nxt = head;
 	for (int i = 0; i < size; ++i)
 	{
-		std::cout << " Element : " << nxt->data << std::endl;
 		nxt = nxt->next;
 	}
+}
+
+template <typename T>
+const Node<T>*
+LinkedList<T>::Head() const
+{
+	return head;
+}
+
+template <typename T>
+const Node<T>*
+LinkedList<T>::Tail() const
+{
+	return tail;
+}
+
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+
+template <typename T>
+class LinkedListHelper
+{
+public:
+	static bool CheckCycle(const LinkedList<T>& in);
+};
+
+template <typename T>
+bool
+LinkedListHelper<T>::CheckCycle(const LinkedList<T>& in)
+{
+	Node<T>* slow = in.head;
+	Node<T>* fast = in.head->next;
+	
+	while (slow != 0 && fast != 0 && fast->next)
+	{
+		if (slow == fast)
+			return true;
+
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+	return false;
 }

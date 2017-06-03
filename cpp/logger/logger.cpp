@@ -24,6 +24,8 @@ Logger::~Logger()
 {
 	std::cout << "closing the file"<<std::endl;
 	_file.close();
+	if (_logger)
+		delete _logger;
 }
 
 void

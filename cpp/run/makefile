@@ -2,7 +2,7 @@
 MAIN_NAME = test.cpp
 
 OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/objs
-EXE_DIR = /home/nikhil/GITHUB/gitrepo/cpp/exe
+EXE_DIR = /home/nikhil/GITHUB/gitrepo/cpp/out
 OBJS = $(wildcard $(OBJ_DIR)/*.o)
 
 #
