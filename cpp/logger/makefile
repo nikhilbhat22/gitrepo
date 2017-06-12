@@ -15,7 +15,7 @@ OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/objs
 	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
 
 .cxx.o:
-	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
+	g++ -c -I../inc $< -o $(OBJ_DIR)/$(subst .cxx,.o,$<)
 
 $(OBJ_DIR)/exe: $(OBJ_DIR)/$(OBJS)
 	$(info not creating executables)

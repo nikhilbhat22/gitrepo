@@ -1,5 +1,6 @@
 
 MAIN_NAME = test.cpp
+MAIN_NAME = runDP.cpp
 
 OBJ_DIR = /home/nikhil/GITHUB/gitrepo/cpp/objs
 EXE_DIR = /home/nikhil/GITHUB/gitrepo/cpp/out
@@ -20,5 +21,7 @@ OBJS = $(wildcard $(OBJ_DIR)/*.o)
 .cxx.o:
 	g++ -g -c -I../inc $< -o $(OBJ_DIR)/$(subst .cpp,.o,$<)
 
-$(EXE_DIR)/exe: $(OBJS) $(MAIN_NAME)
+#$(EXE_DIR)/exe: $(OBJS) $(MAIN_NAME) g++ -g -I../inc -o $@ $^
+
+exe: $(OBJS) $(MAIN_NAME)
 	g++ -g -I../inc -o $@ $^
