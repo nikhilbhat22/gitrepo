@@ -135,8 +135,10 @@ LinkedList<T>::Print() const
 	Node<T>* nxt = head;
 	for (int i = 0; i < size; ++i)
 	{
+		std::cout << nxt->data << " ";
 		nxt = nxt->next;
 	}
+	std::cout << std::endl;
 }
 
 template <typename T>
@@ -161,6 +163,8 @@ class LinkedListHelper
 {
 public:
 	static bool CheckCycle(const LinkedList<T>& in);
+	static bool Reverse(LinkedList<T>& in);
+	static void reverse(Node<T>* curr, Node<T>* prev, Node<T>* &head);
 };
 
 template <typename T>
@@ -179,6 +183,32 @@ LinkedListHelper<T>::CheckCycle(const LinkedList<T>& in)
 		fast = fast->next->next;
 	}
 	return false;
+}
+
+template <typename T>
+bool
+LinkedListHelper<T>::Reverse(LinkedList<T>& in)
+{
+	Node<T>* newHead = nullptr;
+	if (in.head && in.head->next)
+	{
+		reverse(in.head->next, in.head, newHead);
+		in.head->next = nullptr;
+		in.head = newHead;
+	}
+	return true;
+}
+
+template <typename T>
+void
+LinkedListHelper<T>::reverse(Node<T>* curr, Node<T>* prev, Node<T>* &head)
+{
+    if (curr->next)
+        reverse(curr->next, curr, head);
+    else
+        head = curr;
+
+    curr->next = prev;
 }
 
 #endif
